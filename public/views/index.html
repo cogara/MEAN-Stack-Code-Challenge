@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="groceryListApp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="vendor/angular/angular.min.js" charset="utf-8"></script>
+    <script src="scripts/client.js" charset="utf-8"></script>
+    <title>MEAN Code Challenge</title>
+  </head>
+  <body ng-controller="GroceryController as g">
+    <div class="container">
+      <h1>Grocery List</h1>
+      <!-- Item: <input ng-model="g.name" type="text" ng-keyup="$event.keyCode == 13 && g.addItem()" />
+      Qty: <input ng-model="g.qty" type="number" ng-keyup="$event.keyCode == 13 && g.addItem()" />
+      <button ng-click="g.addItem()">Submit</button> -->
+      <ul class="grocery-list">
+        <li class="grocery-header">
+          <div class="grocery-list__header-name">Item</div>
+          <div class="grocery-list__header-qty">Qty</div>
+          <div class="grocery-list__header-buttons">Options</div>
+        </li>
+        <li class="grocery-add">
+          <div class="grocery-add__name"><input ng-model="g.name" type="text" placeholder="Add Item Name"ng-keyup="$event.keyCode == 13 && g.addItem()" /></div>
+          <div class="grocery-add__qty"><input ng-model="g.qty" type="number" placeholder="Add Item Qty" ng-keyup="$event.keyCode == 13 && g.addItem()" /></div>
+          <div class="grocery-add__button"><button class="button" ng-click="g.addItem()">Add Item</button></div>
+        </li>
+        <li class="grocery-item" ng-repeat="item in g.groceryList track by $index">
+          <div class="grocery-item__info" ng-if="!item.edit">
+            <div class="grocery-item__name">
+              {{item.name}}
+            </div>
+            <div class="grocery-item__qty">
+              {{item.qty}}
+            </div>
+            <div class="grocery-item__buttons" ng-if="!item.edit">
+              <button class="button" ng-click="g.editItem($index)">Edit</button>
+              <button class="button" ng-click="g.removeItem(item._id)">Remove</button>
+            </div>
+          </div>
+          <div class="grocery-item__edit" ng-if="item.edit">
+            <div class="grocery-item__edit-name">
+              <input class="input-edit" ng-model="g.editName" type="text" ng-keyup="$event.keyCode == 13 && g.submitEdit(item._id) || $event.keyCode == 27 && g.cancelEdit()" />
+            </div>
+            <div class="grocery-item__edit-qty">
+              <input class="input-edit" ng-model="g.editQty" type="number" ng-keyup="$event.keyCode == 13 && g.submitEdit(item._id) || $event.keyCode == 27 && g.cancelEdit()" />
+            </div>
+            <div class="grocery-item__edit-buttons" ng-if="item.edit">
+              <button class="button" ng-click="g.submitEdit(item._id)">Submit</button>
+              <button class="button" ng-click="g.cancelEdit()">Cancel</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
