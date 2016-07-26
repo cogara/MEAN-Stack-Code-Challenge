@@ -43,6 +43,7 @@
 
 .grocery-add__button, .grocery-list__header-buttons, .grocery-item__buttons, .grocery-item__edit-buttons {
   flex: 1 30%;
+  text-align: right;
 }
 
 .grocery-header > div, .grocery-item__info > div, .grocery-item__edit > div, .grocery-add > div {
